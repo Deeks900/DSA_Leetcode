@@ -1,0 +1,39 @@
+//O(nlogn)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        //Creating a vector of pairs
+        vector<pair<int, int>> index;
+
+        //store elements and their index in it
+        for(int i = 0; i < nums.size(); i++){
+            pair<int, int> temp = make_pair(nums[i], i);
+            index.push_back(temp);
+        }
+
+        //sort this vector on the basis of first element of the pair
+        sort(index.begin(), index.end());
+
+        //Now use to pointers approach to get the answer
+        vector<int> ans;
+        int i = 0;
+        int j = nums.size()-1;
+
+        //i should be less than j because an element can't be used twice
+        while(i < j){
+            if(index[i].first+index[j].first > target){
+                j--;
+            }
+            else if(index[i].first+index[j].first < target){
+                i++;
+            }
+            else{
+                ans.push_back(index[i].second);
+                ans.push_back(index[j].second);
+                break;
+            }
+        }
+    return ans;    
+    }
+};
