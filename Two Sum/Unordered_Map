@@ -1,0 +1,25 @@
+//O(N)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans;
+        
+        //Storing the indices of all elements
+        unordered_map<int, int> freq;
+        for(int i = 0; i < nums.size(); i++){
+            freq[nums[i]] = i;
+        }
+        
+        //Traversing the nums array
+        for(int i = 0; i < nums.size(); i++){
+            int temp = target-nums[i];
+            if(freq.find(temp) != freq.end() && freq[temp] != i){
+                ans.push_back(i);
+                ans.push_back(freq[temp]);
+                break;
+            }
+        }
+        
+        return ans;
+    }
+};
