@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+
+        bool* isExist = new bool[256]{false};
+        int acquireIndex = 0;
+        int releaseIndex = -1;
+        int currLen = 0;
+        int maxLen = 0;
+
+        while(acquireIndex < s.length()){
+            char charToAcquire = s[acquireIndex];
+            while(isExist[int(charToAcquire)] == true){
+                releaseIndex++;
+                char charToRelease = s[releaseIndex];
+                isExist[int(charToRelease)] = false;
+            }
+
+            currLen = (acquireIndex-releaseIndex);
+            maxLen = max(maxLen, currLen);
+            isExist[int(charToAcquire)] = true;
+            acquireIndex++;
+            
+        }
+    return maxLen;
+    }
+};
