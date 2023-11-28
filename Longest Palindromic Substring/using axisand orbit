@@ -1,0 +1,56 @@
+//O(N^2)
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string result = "";
+
+        //Trying to capture odd length longest palindromic substring
+        for(int axis=0; axis < s.length(); axis++){
+            int orb = 1;
+            int len = 1;
+
+            while(axis-orb >= 0 && axis+orb < s.length()){
+                //if the end members of the orbit are same
+                if(s[axis-orb] == s[axis+orb]){
+                    orb++;
+                    len += 2;
+                }
+                //place the axis to next member
+                else{
+                    break;
+                }
+            }
+
+            if(len > result.length()){
+                int startIndex = axis-len/2;
+                int endIndex = startIndex+len-1;
+                result = s.substr(startIndex, endIndex);
+            } 
+        }
+
+        //Trying to capture the even length longest palindromic substring
+        for(int axis = 0; axis < s.length()-1; axis++){
+            int len = 0;
+            int orb = 1;
+
+             while(axis-orb+1 >= 0 && axis+orb < s.length()){
+                //if the end members of the orbit are same
+                if(s[axis-orb+1] == s[axis+orb]){
+                    orb++;
+                    len += 2;
+                }
+                //place the axis to next member
+                else{
+                    break;
+                }
+            }
+
+            if(len > result.length()){
+                int startIndex = axis-len/2+1;
+                int endIndex = startIndex+len-1;
+                result = s.substr(startIndex, endIndex);
+            } 
+        }
+        return result;
+    }
+};
