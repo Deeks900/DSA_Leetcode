@@ -1,0 +1,39 @@
+//O(N)
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        string ans = "";
+        if(numRows == 1){
+            return s;
+        }
+
+        for(int row = 0; row < numRows; row++){
+            int idx = row;
+            int deltaUp = 2*row;
+            int deltaDown = 2*((numRows-1)-row);
+            bool directionDown = true;
+
+            while(idx < s.length()){
+                ans += s[idx];
+                if(row == 0){
+                    idx += deltaDown;
+                }
+                else if(row == numRows-1){
+                    idx += deltaUp;
+                }
+                else{
+                    if(directionDown){
+                        idx += deltaDown;
+                    }
+                    else{
+                        idx += deltaUp;
+                    }
+                    directionDown = !directionDown;
+                }
+                
+            }
+
+        }
+        return ans;
+    }
+};
