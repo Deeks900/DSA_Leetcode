@@ -1,0 +1,37 @@
+#include <iostream>
+#include<cmath>
+
+using namespace std;
+int main(){
+    int n,k;
+    cin>>n>>k;
+    
+    //write your code here
+    int noOfDigit = 0;
+    int temp = n;
+    
+    //getting no of digits
+    while(temp != 0){
+        temp = temp/10;
+        noOfDigit++;
+    }
+     
+    int ans = 0;
+    
+    //on k=no of digit we get the same number
+    k = k%noOfDigit;
+    //handling negative k
+    if(k < 0){
+        k = noOfDigit+k;
+    }
+    
+    int divisor = pow(10, k);
+    int multiplier = pow(10, noOfDigit-k);
+    
+    int digRotate = n%divisor;
+    n = n/divisor;
+    
+    ans = digRotate*multiplier+n;
+    return ans;
+
+}
