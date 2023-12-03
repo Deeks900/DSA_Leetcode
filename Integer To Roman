@@ -1,0 +1,50 @@
+//O(log(N))
+class Solution {
+public:
+    string intToRoman(int num) {
+        string ans = "";
+
+        //convert thousand place to roman
+        generateRoman(ans, 'M', '*', '*', num/1000);
+        num = num%1000;
+
+        //convert hundred placeto roman
+        generateRoman(ans, 'C', 'D', 'M', num/100);
+        num = num%100;
+
+        //convert tens place to roman
+        generateRoman(ans, 'X', 'L', 'C', num/10);
+        num = num%10;
+
+        //convert ones place to roman
+        generateRoman(ans, 'I', 'V', 'X', num);
+
+        return ans;
+    }
+
+    void generateRoman(string &ans, char minor, char middle, char major, int num){
+        if(num <= 3){
+            for(int i = 1; i <= num; i++){
+                ans += minor;
+            }
+        }
+        else if(num == 4){
+            ans += minor;
+            ans += middle;
+        }
+        else if(num == 5){
+            ans += middle;
+        }
+        else if(num < 9){
+            ans += middle;
+            for(int i = 5; i < num; i++){
+                ans += minor;
+            }
+        }
+        else if(num == 9){
+            ans += minor;
+            ans += major;
+        }
+        
+    }
+};
