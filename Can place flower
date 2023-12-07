@@ -1,0 +1,57 @@
+//O(N)
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        //Find first one ans last one
+        int fi = -1;
+        int li = -1;
+        int max = 0;
+
+        //finding first and last index of the one
+        for(int i = 0; i < flowerbed.size(); i++){
+            if(flowerbed[i] == 1){
+                if(fi == -1){
+                    fi = i;
+                    li = i;
+                }
+                else{
+                   li = i; 
+                }
+            }
+        }
+
+        //If all the entries are zero in flowerbed
+        if(fi == -1){
+            max = (flowerbed.size()+1)/2;
+            if (max >= n){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+
+        //Now capture the count in starting and end
+        max += fi/2;
+        max += (flowerbed.size()-1-li)/2;
+
+        //Now capture the count in middle 
+        int count = 0;
+        for(int i=fi+1; i<li; i++){
+            if(flowerbed[i] == 0){
+                count++;
+            }
+            else{
+                max += (count-1)/2;
+                count = 0;
+            }
+        }
+
+        max += (count-1)/2;
+        if(max >= n){
+            return true;
+        }
+        return false;
+    }
+};
