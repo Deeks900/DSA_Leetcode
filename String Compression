@@ -1,0 +1,39 @@
+//O(n)
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        string ans = "";
+
+        for(int i = 0; i < chars.size();){
+            char currentWord = chars[i];
+            int count = 1;
+            i++;
+
+            while(i < chars.size()){
+                if(chars[i] == currentWord){
+                    count += 1;
+                    i++;
+                }
+                else{
+                    break;
+                }
+            }
+
+            if(count == 1){
+                ans += currentWord;
+            }
+            else{
+                ans += currentWord;
+                ans += to_string(count);
+            }
+
+        }
+      
+        chars.clear();
+        for(auto i: ans){
+            chars.push_back(i);
+        }
+
+        return chars.size();
+    }
+};
